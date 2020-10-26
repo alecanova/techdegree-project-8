@@ -6,13 +6,12 @@ const logger = require('morgan');
 
 const { sequelize, Book } = require('./models');
 
-
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const routes = require('./routes/index');
+const books = require('./routes/books');
 
 const app = express();
 
-// async IIFE
+//async IIFE
 (async () => {
   console.log('Testing the connection to the database...');
   try {
@@ -23,11 +22,10 @@ const app = express();
   }
 })();
 
-// Testing JSON
-app.get('/', async (req, res) => {
-  const books = await Book.findAll();
-  res.json(books);
-}); 
+//Sync tables
+(async () => {
+  await Book.sequelize.sync({ force: true });
+}) ();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,23 +37,31 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', routes);
+app.use('/books', books);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+/* 404 handler to catch undefined or non-existent route requests */  
+app.use((req, res, next) => {
+
+  const err = new Error('Not Found');
+  err.status = 404;
+  err.message = "Oops! Looks like the page doesn't exist."
+
+  next(err);
+
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+/* Error handler */
+app.use ( (err, req, res, next) => {
 
-  // render the error page
+  // Set locals
+  res.locals.error = err;
+  res.locals.message = err.message;
+  // Render error page
   res.status(err.status || 500);
-  res.render('error');
+  console.log(err.message);
+  res.render('page-not-found');
+
 });
 
 module.exports = app;
