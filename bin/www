@@ -25,7 +25,7 @@ var server = http.createServer(app);
 
 
 /**
- * * Synchronize models with the database.
+ * Synchronize models with the database.
  * Listen on provided port, on all network interfaces.
  */
 sequelize.sync().then(() => {
