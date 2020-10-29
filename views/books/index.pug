@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   h1= Books
-    form(action='/books', method='get')
+    form(action='/books', method='post')
       a(href='/books/new', class='button') Add New Book
         table
           thead
