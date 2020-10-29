@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  h2= title
+  
+  include errors  
+  
+  form(action="/books", method="post")
+    include form
+    input(type='submit', value='Add New Book')
+    a(class='button', href='/books') Cancel
