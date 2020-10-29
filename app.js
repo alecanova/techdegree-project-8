@@ -4,28 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const { sequelize, Book } = require('./models');
-
 const routes = require('./routes/index');
 const books = require('./routes/books');
 
 const app = express();
-
-//async IIFE
-(async () => {
-  console.log('Testing the connection to the database...');
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-})();
-
-//Sync tables
-(async () => {
-  await Book.sequelize.sync({ force: true });
-}) ();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
