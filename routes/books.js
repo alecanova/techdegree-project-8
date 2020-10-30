@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Book = require('../models').Book;
+const { Book } = require('../models');
 
 /***  Handler function to wrap each route ***/
 function asyncHandler(cb){
@@ -9,13 +9,13 @@ function asyncHandler(cb){
 
     try {
 
-      await cb(req, res, next)
+      await cb(req, res, next);
 
     } catch(error){
-      console.log(error);
-			res.locals.message = error.message;
-			res.status(error.status || 500);
-      res.render('books/error');
+        console.log(error);
+        res.locals.message = error.message;
+        res.status(error.status || 500);
+        res.render('books/error');
       
     }
 
@@ -26,17 +26,18 @@ function asyncHandler(cb){
 /*** get / - Shows the full list of books ***/
 router.get( '/', asyncHandler( async( req, res ) => {
 
-  const books = await Book.findAll( { order: [['title', 'ASC']] });
+  let books = [];
+  books = await Book.findAll( { order: [["title", "ASC"]] });
   res.render('books/index', { books, title: 'Library List'});
 
 }));
 
 /*** get /books/new - Shows the create new book form ***/
-router.get( '/new', asyncHandler( async( req, res) => {
+router.get( '/new', ( req, res) => {
 
   res.render('books/new', { book: {}, title: 'New Book'});
 
-}));
+});
 
 /*** post /books/new - Posts a new book to the database ***/
 router.post( '/', asyncHandler( async( req, res ) => {
