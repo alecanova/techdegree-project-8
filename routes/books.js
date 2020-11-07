@@ -35,11 +35,11 @@ router.get( '/', asyncHandler( async( req, res ) => {
 /*** get /books/new - Shows the create new book form ***/
 router.get( '/new', ( req, res) => {
 
-  res.render('books/new', { book: {}, title: 'New Book'});
+  res.render('books/new-book', { book: {}, title: 'New Book'}); //renders the pug file name
 
 });
 
-/*** post /books/new - Posts a new book to the database ***/
+/*** post /books/new-book - Posts a new book to the database ***/
 router.post( '/', asyncHandler( async( req, res ) => {
 
   let book;
@@ -51,7 +51,7 @@ router.post( '/', asyncHandler( async( req, res ) => {
   } catch(error) {
     if(error.name === 'SequelizeValidationError') {
       book = await Book.build(req.body);
-      res.render( 'books/new', { book, errors: error.errors, title: 'New Book' })
+      res.render( 'books/new-book', { book, errors: error.errors, title: 'New Book' })
     } else {
       throw error('Hang on a second! There was a problem with that book...');
     }
@@ -66,15 +66,15 @@ router.get( '/:id', asyncHandler( async(req, res) => {
   const book = await Book.findByPk(req.params.id);
 
   if (book) {
-    res.render('books/detail', { book, title: book.title });
+    res.render('books/update-book', { book, title: book.title });
   } else {
     res.sendStatus(404);
   }
 
 }));
 
-/*** post /:id/edit - Updates book info in the database ***/
-router.post( '/:id/edit', asyncHandler( async(req, res) => {
+/*** post /:id/ - Updates book info in the database ***/
+router.post( '/:id', asyncHandler( async(req, res) => {
 
   let book;
 
@@ -93,7 +93,7 @@ router.post( '/:id/edit', asyncHandler( async(req, res) => {
     if(error.name === 'SequelizeValidationError') {
       book = await Book.build(req.body);
       book.id = req.params.id;
-      res.render( 'books/edit', { book, errors: error.errors, title: 'Edit Book' })
+      res.render( 'books/update-book', { book, errors: error.errors, title: 'Edit Book' })
     } else {
       throw error('Hang on a second! There was a problem with that book...');
     }

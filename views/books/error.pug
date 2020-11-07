@@ -1,6 +1,6 @@
 extends ../layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  h2= Book Error: #{message}
+  p: a(href="/books") Take me back to the Library
+  
