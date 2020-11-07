@@ -24,6 +24,7 @@ app.set('port', port);
 var server = http.createServer(app);
 
 
+
 /**
  * Connect database
  * Synchronize models with the database.
