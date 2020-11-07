@@ -4,5 +4,7 @@ block content
     h2= title
     form(action="/books/" + book.id, method="post")
         include form
-        input(type="submit", value="Update Book")
+        input(type="submit", value="Edit Book")
+    form(action="/books/" + book.id + "/delete", method="post", onsubmit="return confirm('Are you sure you want to delete this book?');")
+        input(type="submit", value="Delete Book")
     a(href="/books") Take me Back to the Library
