@@ -2,9 +2,12 @@ extends ../layout
 
 block content
     h2= title
+
+    include validation-error
+
     form(action="/books/" + book.id, method="post")
         include form
         input(type="submit", value="Edit Book")
     form(action="/books/" + book.id + "/delete", method="post", onsubmit="return confirm('Are you sure you want to delete this book?');")
         input(type="submit", value="Delete Book")
-    a(href="/books") Take me Back to the Library
+    a(href="/books") Back to the Shelf!
