@@ -1,22 +1,32 @@
 extends ../layout
 
 block content
-  div
-    h2 Books
-    a(href="/books/new", class='button') Add New Book
+  form(action="/books", method="get")
+    label(for="search") Search
+      input(name="search" type="search" id="search" value="")
+      input(type="submit", value="Search")
+    a(href="/books") Clear
+    a(href="/books/new") Add New Book
 
   main
-    table
-      thead
-        tr
-          th Title
-          th Author
-          th Genre
-          th Year
-      tbody
-        each book in books
+    if books.length > 0 
+      table
+        thead
           tr
-            td: a(href='/books/' + book.id) #{book.title}
-            td= book.author
-            td= book.genre
-            td= book.year
+            th Title
+            th Author
+            th Genre
+            th Year
+        tbody
+          each book in books
+            tr
+              td: a(href='/books/' + book.id) #{book.title}
+              td= book.author
+              td= book.genre
+              td= book.year 
+
+    else 
+
+      h3 Sorry, we don't have that!
+
+    
