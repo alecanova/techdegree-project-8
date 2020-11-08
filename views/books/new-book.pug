@@ -3,8 +3,10 @@ extends ../layout
 block content
   h2= title
 
+  include validation-error
+
   form(action="/books", method="post")
     include form
     input(type="submit", value="Add Book")
-    a(href="/books") Cancel
+    a.button(href="/books") Cancel
   
