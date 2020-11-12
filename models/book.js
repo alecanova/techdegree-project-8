@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
       type: Sequelize.STRING,
       validate: {
         notEmpty: {
-          msg: 'Please provide a value for "title" ',
+          msg: 'Please provide a value for "Title" ',
         }, 
       }
     },
@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       type: Sequelize.STRING,
       validate: {
         notEmpty: {
-          msg: 'Please provide a value for "title" ',
+          msg: 'Please provide a value for "Author" ',
         }, 
       }
     },
