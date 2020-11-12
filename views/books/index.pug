@@ -1,14 +1,15 @@
 extends ../layout
 
 block content
-  form(action="/books", method="get")
-    label(for="search") Search
-      input(name="search" type="search" id="search" value="")
-      input(type="submit", value="Search")
-    a(href="/books") Clear
-    a(href="/books/new") Add New Book
+  div.div
+    form#search-form(action="/books", method="get")
+      label(for="search") Search
+        input(name="search" type="search" id="search" value="")
+        input(type="submit", value="Search")
+      a#clear(href="/books") Clear
+      a#new-book(href="/books/new") Add New Book
 
-  main
+  main.index-content
     if books.length > 0 
       table
         thead
@@ -20,13 +21,16 @@ block content
         tbody
           each book in books
             tr
-              td: a(href='/books/' + book.id) #{book.title}
-              td= book.author
-              td= book.genre
-              td= book.year 
+              td.book-rows 
+                a(href='/books/' + book.id) #{book.title}
+              td #{book.author}
+              td #{book.genre}
+              td #{book.year} 
 
     else 
 
       h3 Sorry, we don't have that!
 
     
+
+      
