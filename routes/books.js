@@ -75,9 +75,10 @@ router.get( '/', asyncHandler( async( req, res ) => {
 
   }  
     
-  res.render('books/index', { books, title: 'Library List', search_book});
+  res.render('books/index', { books, title: 'Book Shelf', search_book});
     
 }));
+
 
 /*** get /books/new - Shows the create new book form ***/
 router.get( '/new', ( req, res) => {
