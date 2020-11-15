@@ -4,6 +4,7 @@
 
 
 body {
+  background-color: #cce2ee;
   display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 5fr;
@@ -24,11 +25,15 @@ h2 {
 	font-size: 2rem;
   padding: 1.3rem 0;
   text-align: center;
+  font-family: 'Satisfy';
 }
 
 h3 {
 	font-size: 1.75rem;
-	padding-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  text-align: center;
+  font-family: 'Satisfy';
+  
 }
 
 header {
@@ -41,7 +46,7 @@ header {
   margin-right: auto;
 }
 
-.index-content {
+#index-content {
 	margin-left: auto;
   margin-right: auto;
 	max-width: 1000px;
@@ -55,6 +60,7 @@ form {
 	padding: 0.75rem;
   max-width: 1000px;
   width: 100%;
+  width: 700px;
   margin-top: 1rem;
   border-collapse: collapse;
   border-radius: 0.5rem;
@@ -62,13 +68,29 @@ form {
   box-shadow: 0 0 10px 1px green;
 }
 
-#search-form {
-  width: 700px;
+
+#search {
+  width: 70%;
 }
 
-#clear, #new-book {
-  display: block;
+#search-button {
+  padding: 12px 22px 14px;
 }
+
+.options {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.options a {
+  display: inline;
+  justify-content: space-between;
+}
+
+#new-book {
+  padding-right: 340px;
+}
+
 
 a {
   color: #019875;
@@ -76,14 +98,14 @@ a {
   font-weight: 800;
   font-size: 1.3rem;
   transition: 0.4s;
-  text-align: center;
 	padding: 1.5rem 0 0.75rem;
-	display: block;
 }
 
 a.back {
   font-size: 2rem;
-  margin-top: 2.5em;
+  margin-top: 1em;
+  text-align: center;
+  text-decoration: underline;
 }
 
   a:hover {
@@ -94,9 +116,9 @@ a.button, input[type=submit] {
   color: white;
   background: #019875;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 10px 14px 12px;
+  padding: 12px 14px 12px;
   font-size: 17px;
-  border-radius: 2px;
+  border-radius: 0.5rem;
   cursor: pointer;
   margin-top: 0.75rem;
 }
@@ -113,10 +135,7 @@ input[type=submit] {
     background-color: #01b189;
   }
 
-  #new-book {
-    margin-bottom: 2rem;
-  }
-
+  /* TABLE */
   table {
     width: 100%;
     width: 700px;
@@ -129,6 +148,10 @@ input[type=submit] {
 
 
 th {
+  color: #D8B493;
+  border-color: black;
+  font-family: 'Satisfy';
+  font-size: 1.2em;
   border-collapse: collapse;
   border-bottom: 2px solid #D8B493;
   text-align: left;
@@ -152,15 +175,19 @@ td a {
 }
 
 label {
+  font-family: 'Satisfy';
+  color: #D8B493;
+  text-align: center;
   padding-top: 16px;
 	padding-bottom: 5px;
   font-weight: bold;
   display: inline-block;
   transition: 0.4s;
+
 }
 
 input {
-  padding: 10px 14px 12px;;
+  padding: 10px 14px 12px 14px;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 14px;
   border-radius: 2px;
@@ -174,4 +201,35 @@ input[type=text] {
 
 .error {
   color: rgb(236, 15, 15);
+  list-style-type: none;
+  text-decoration: underline;
+  
+}
+
+.validation {
+  text-align: center;
+}
+
+/* PAGINATION */
+.pagination{
+  margin: 40px 0 0 0;
+  text-align: center;
+}
+ 
+.pagination li{
+  display: inline;
+}
+
+.pagination li a{
+  border: 1px solid #eaeaea;
+  border-radius: 0.5rem;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #01b189;
+}
+
+.pagination li a.active,
+.pagination li a:hover{
+  background-color: #01b189;
+  color: #fff;
 }
