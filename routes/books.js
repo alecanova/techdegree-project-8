@@ -3,7 +3,6 @@ const router = express.Router();
 const { Book } = require('../models');
 const { Op } = require("sequelize");
 
-
 /***  Handler function to wrap each route ***/
 function asyncHandler(cb){
 
@@ -31,50 +30,52 @@ router.get( '/', asyncHandler( async( req, res ) => {
   let books = [];
   let search_book = req.query.search;
 
-  if (search_book) {
+    if (search_book) {
 
-    books = await Book.findAll({
+      books = await Book.findAll({
 
-      where: {
-        // title LIKE '%search%' OR author LIKE '%search%' OR genre LIKE '%search%' OR year LIKE '%search%'
-        [Op.or]: [
+        where: {
+          // title LIKE '%search%' OR author LIKE '%search%' OR genre LIKE '%search%' OR year LIKE '%search%'
+          [Op.or]: [
 
-          {
-            title: {
-              [Op.like]: `%${search_book}%`
+            {
+              title: {
+                [Op.like]: `%${search_book}%`
+              }
+            },
+            {
+              author: {
+                [Op.like]: `%${search_book}%`
+              }
+            },
+            {
+              genre: {
+                [Op.like]: `%${search_book}%`
+              }
+            },
+            {
+              year: {
+                [Op.like]: `%${search_book}%`
+              }
             }
-          },
-          {
-            author: {
-              [Op.like]: `%${search_book}%`
-            }
-          },
-          {
-            genre: {
-              [Op.like]: `%${search_book}%`
-            }
-          },
-          {
-            year: {
-              [Op.like]: `%${search_book}%`
-            }
-          }
-          
-        ]
-          
-      }  
+            
+          ]
+            
+        }  
 
-    });
-
-  } else {
-
-    search_book = "";
-
-    // render all the books by title
-    books = await Book.findAll( { order: [["title", "ASC"]] });
-
-  }  
+      });
     
+
+    } else {
+
+      search_book = "";
+
+      // render all the books by title
+      books = await Book.findAll( { order: [["title", "ASC"]] });
+
+    }  
+  
+  
   res.render('books/index', { books, title: 'Book Shelf', search_book});
     
 }));
