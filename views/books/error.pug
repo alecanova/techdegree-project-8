@@ -1,6 +1,10 @@
 extends ../layout
 
 block content
-  h2= Book Error: #{message}
-  p: a(href="/books") Take me back to the Library
+  h1 Server Error
+  p Sorry! There was an error on the server.
+  p= errors
+  p
+    a(href="/books") Back to the Shelf!
+  
   
