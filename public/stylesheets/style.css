@@ -210,6 +210,9 @@ input[type=text] {
   text-align: center;
 }
 
+.not-found{
+  text-align: center;
+}
 /* PAGINATION */
 .pagination{
   margin: 40px 0 0 0;
